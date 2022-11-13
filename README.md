@@ -1,7 +1,9 @@
 ## News video website
 It's a [Demo website](http://140.238.65.147:5000). Not for commercial purposes!
 The main goal is to have the main news sites' videos in one place.
-New news video links are uploaded and checked at the moment the user chooses a channel. This process is very fast because asyncio library are used. 
+New news video links are uploaded and checked at the moment the user chooses a channel. This process is very fast because asyncio library are used.
+
+New channel scrapers can be easily added. The new scraper should be imported only in one place (in scraper.py).
 
 
 ### Install all required libraries:
