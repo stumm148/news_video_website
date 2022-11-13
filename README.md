@@ -7,6 +7,7 @@ New channel scrapers can be easily added. The new scraper should be imported onl
 
 
 ### Install all required libraries:
+requires python 3.8 or greater
 
 ```
 pip install -r requirements.txt
