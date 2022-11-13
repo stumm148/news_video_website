@@ -1,3 +1,4 @@
+import os
 from time import perf_counter
 from typing import List, Callable
 import asyncio
@@ -5,10 +6,8 @@ import asyncio
 from scrape_data import ContentScrapeInfo
 from log import log_msg
 
-import lnk_scraper
-import ltv_scraper
-import delfi_scraper
-import lrytas_scraper
+from channels_scrapers import lnk_scraper, ltv_scraper, delfi_scraper, lrytas_scraper
+
 
 # new scrapers should be added only once only here
 SCRAPERS_DICT = {'lnk': lnk_scraper, 'ltv': ltv_scraper,
@@ -46,7 +45,7 @@ class BaseScraper:
 
         for url in content_links:
             # initiate scraper
-            s = self.scraper()
+            s = self.scraper(channel=self.channel)
             task = asyncio.create_task(s.scrape(url))
             if task not in tasks:
                 tasks.append(task)
@@ -59,7 +58,9 @@ class BaseScraper:
 
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        # for windows
+        if os.name == 'nt':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
         # saving data to the dataclass
         start_time = perf_counter()
