@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+   <body style="background-color: #333333; color: white">
+       <div> <b> Demo Site </b></div>
+       <br>
+       <div> <b> Scraping Live Stream Video With Python. Using Flask frameworks and asyncio, aiohttp, lxml.html libs. </b></div>
+
+    <br>
+       <div id="status" type="text"> Status </div>
+   <br>
+
+   <script>
+      document.getElementById("status").innerHTML = "{{ status_msg }}";
+
+      function status_change(){
+          document.getElementById("status").innerHTML = "Async scraping start...";
+      }
+
+   </script>
+
+   <div> <b> Naujienų kanalai </b></div>
+   <br>
+
+   <form action = "/tv_content" method = "POST">
+
+      <table border = 0>
+
+          {% for value in  channel_list %}
+
+              <tr>
+                  <th>  {{ value }}
+
+                  </th>
+                  <td>
+                      <input  onclick="status_change();" id='{{ value }}'  type="submit" name='{{ value }}' value="Async Scrape" />
+                  </td>
+              </tr>
+
+          {% endfor %}
+
+      </table>
+   <br>
+
+   </form>
+
+   </body>
+</html>
