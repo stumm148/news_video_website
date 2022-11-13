@@ -1,3 +1,4 @@
+import os
 from time import perf_counter
 from typing import List, Callable
 import asyncio
@@ -57,7 +58,9 @@ class BaseScraper:
 
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        # for windows
+        if os.name == 'nt':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
         # saving data to the dataclass
         start_time = perf_counter()
